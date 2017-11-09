@@ -1,20 +1,27 @@
+package ru.job4j;
+
 /**
 * @author afilippov
 * @version 1
 * @since 09.11.2017
 */
-package ru.job4j;
 
 
-public class Calculate{
 
-public static void main(String[] args){
-	System.out.println("Hello world");
-	}
+public class Calculate {
+    /**
+     * Main.
+     * @param args - args.
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
 	/**
-	 * Сложение
-	 * @param first первый аргумент.
-	 * @param second второй аргумент
-	 * @return результат
-	 */
+* Method echo.
+* @param name Your name.
+* @return Echo plus your name.
+*/
+public String echo(String name) {
+    return "Echo, echo, echo : " + name;
+}
 }
