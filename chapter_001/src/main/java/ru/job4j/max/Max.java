@@ -12,8 +12,8 @@ package ru.job4j.max;
      * @param first, second.
      */
 	 public int max(int first, int second) {
-		 boolean maximum = first > second;
-		 return maximum ? first : second;
+
+		 return first > second ? first : second;
 	 }
 	 
  }	 
