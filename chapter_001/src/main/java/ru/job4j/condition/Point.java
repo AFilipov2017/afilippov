@@ -27,7 +27,7 @@ public class Point {
 
         if (y == a * x + b) {
 
-            return true;
+          return this.y == this.x * a + b;
         }
         return false;
     }

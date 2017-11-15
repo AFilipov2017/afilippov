@@ -20,4 +20,14 @@ public class PointTest {
         // assert result by excepted value.
         assertThat(rsl, is(true));
    }
+    @Test
+    public void whenPointOnLineThenFalse() {
+        //create of new point.
+        Point a = new Point(1, 0);
+        // execute method - is and get result;
+        boolean rsl = a.is(0, 1);
+        // assert result by excepted value.
+        assertThat(rsl, is(false));
+    }
+
 }
