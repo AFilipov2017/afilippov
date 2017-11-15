@@ -4,7 +4,7 @@ package ru.job4j.condition;
  * @version 1
  * @since 14.11.2017
  */
- 
+
 public class Point {
     private int x;
     private int y;
@@ -24,12 +24,7 @@ public class Point {
 
     public boolean is(int a, int b) {
 
-
-        if (y == a * x + b) {
-
-          return this.y == this.x * a + b;
+            return this.y == this.x * a + b;
         }
-        return false;
-    }
 }
 
