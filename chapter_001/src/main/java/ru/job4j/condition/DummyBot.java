@@ -8,17 +8,19 @@ package ru.job4j.condition;
 public class DummyBot {
     /**
      * Отвечает на вопросы.
-     * @param question Вопрос от клиента.
+     * @param question, v.
      * @return Ответ.
      */
+    public String v = "Это ставит меня в тупик. Спросите другой вопрос.";
     public String answer(String question) {
         if (question.equals("Привет, Бот.")) {
-        return "Привет, умник.";
+       v = "Привет, умник.";
         }
         if (question.equals(("Пока."))) {
-            return "До скорой встречи.";
+             v = "До скорой встречи.";
         }
-        return "Это ставит меня в тупик. Спросите другой вопрос.";
+
+        return v;
     }
 
 }

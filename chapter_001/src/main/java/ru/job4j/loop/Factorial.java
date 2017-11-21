@@ -16,11 +16,11 @@ public class Factorial {
     public int calc(int n) {
         int rez = 1;
         if (n == 0) {
-            return 1;
+            rez = 1;
         }
         for (int i = 1; i <= n; i++) {
             int a = i;
-            rez = rez * a;
+            rez *= a;
         }
         return rez;
     }
