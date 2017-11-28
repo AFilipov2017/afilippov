@@ -2,18 +2,18 @@ package ru.job4j.array;
 
 import java.lang.reflect.Array;
 
+/**
+ * @author Andrey Filippov (afilipov1980@gmail.com)
+ * @version 1
+ * @since 20.11.2017
+ */
+
 public class Turn {
-
-    public static void main(String[] args) {
-        int[] arr = {3, 6, 9, 12, 15, 18};
-        back(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
-        }
-
-
-    }
-
+    /**
+     * метод переворачивает значения массива в обратном порядке.
+     * @param  array
+     * @return возвращает измененный массив
+     */
     public static int[] back(int[] array) {
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
