@@ -11,16 +11,11 @@ public class RotateArray {
      * @param array массив для поворота
      */
 
-    public int[][] rotate(int[][] array) {
+    public static int[][] rotate(int[][] array) {
         int[][] arr = new int[array.length][array[0].length];
-        for (int i = 0; i < array.length; i++) {
+                for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-               arr[i][j] = array[array[j].length - j - 1][i];
-            }
-        }
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                array[i][j] = arr[i][j];
+                arr[i][j] = array[array[j].length - 1 - j][i];
             }
         }
         return arr;
