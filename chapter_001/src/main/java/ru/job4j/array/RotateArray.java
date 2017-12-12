@@ -13,7 +13,7 @@ public class RotateArray {
 
     public static int[][] rotate(int[][] array) {
         int[][] arr = new int[array.length][array[0].length];
-                for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 arr[i][j] = array[array[j].length - 1 - j][i];
             }
