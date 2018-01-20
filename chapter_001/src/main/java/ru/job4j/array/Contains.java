@@ -1,27 +1,40 @@
 package ru.job4j.array;
 
+/**
+ * @author Andrey Filippov (afilipov1980@gmail.com)
+ * @version 1
+ * @since 20.01.2018
+ */
 
-import java.util.Arrays;
 
 public class Contains {
-    boolean contains(String origin, String sub) {
-        char[] one = origin.toCharArray();
-        char[] two = sub.toCharArray();
-        char[] three = new char[two.length];
-        int a = 0;
-        for (int i = 0; i < two.length - 1; i++) {
-            for (int j = a; j < one.length - 1; j++) {
-                if (two[i] == one[j] && two[i + 1] == one[j + 1]) {
-                    three[i] = one[j];
-                    a = ++j;
+    /**
+     * Проверяет, содержится ли подстрока в строке
+     *
+     * @param origin строка
+     * @param sub    подстрока
+     * @return true, если содержится; false иначе
+     */
+    public boolean contains(String origin, String sub) {
+        char[] origArr = origin.toCharArray();
+        char[] subArr = sub.toCharArray();
+        int j = 0;
+        boolean result = false;
+        for (int i : origArr) {
+            if (i == subArr[j]) {
+                if (j == subArr.length - 1) {
+                    result = true;
                     break;
                 }
+                j++;
+                result = true;
+            }
+                else {
+                j = 0;
+                result = false;
             }
         }
-        if (two[two.length - 1] == one[a]) {
-            three[three.length - 1] = one[a];
-        }
-        return Arrays.equals(two, three);
+             return result;
     }
 }
 
