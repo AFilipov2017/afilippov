@@ -20,7 +20,7 @@ public class Factorial {
         }
         for (int i = 1; i <= n; i++) {
             int a = i;
-            rez = rez * a;
+            rez *= a;
         }
         return rez;
     }

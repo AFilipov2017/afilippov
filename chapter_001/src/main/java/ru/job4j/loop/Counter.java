@@ -22,7 +22,7 @@ public class Counter {
 
             if (i % 2 == 0) {
                 int a = i;
-                rez = rez + a;
+                rez += a;
             }
         }
         return rez;

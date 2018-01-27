@@ -28,8 +28,7 @@ public class Contains {
                 }
                 j++;
                 result = true;
-            }
-                else {
+            } else {
                 j = 0;
                 result = false;
             }
