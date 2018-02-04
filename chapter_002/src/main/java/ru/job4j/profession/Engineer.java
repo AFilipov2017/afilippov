@@ -4,13 +4,12 @@ public class Engineer extends Profession {
 
     public Engineer() {
     }
-
-    public Engineer(String aName) {
-        this.name = aName;
+    public Engineer(String name) {
+        super(name);
     }
 
     public Create devices(Tools tools) {
-Create create = new Create("create");
-return create;
+        Create create = new Create("create");
+        return create;
     }
 }
