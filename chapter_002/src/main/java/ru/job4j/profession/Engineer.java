@@ -1,8 +1,6 @@
 package ru.job4j.profession;
 
 public class Engineer extends Profession {
-    private String name;
-
     public Engineer() {
     }
     public Engineer(String name) {

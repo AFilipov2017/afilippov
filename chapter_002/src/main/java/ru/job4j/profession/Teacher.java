@@ -1,9 +1,6 @@
 package ru.job4j.profession;
 
 public class Teacher extends Profession {
-    private String name;
-    private String tools;
-
     public Teacher() {
     }
     public Teacher(String name, String tools) {

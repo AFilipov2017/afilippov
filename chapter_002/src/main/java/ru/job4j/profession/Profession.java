@@ -1,8 +1,8 @@
 package ru.job4j.profession;
 
 public class Profession {
-   private String name;
-   private String tools;
+   String name;
+   String tools;
 
    public Profession() {
 

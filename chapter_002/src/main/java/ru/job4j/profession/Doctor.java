@@ -3,8 +3,6 @@ package ru.job4j.profession;
 
 
 public class Doctor extends Profession {
-    private String name;
-    private String tools;
     public Doctor() {
     }
 
