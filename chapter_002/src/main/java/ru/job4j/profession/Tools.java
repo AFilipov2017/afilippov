@@ -1,6 +1,8 @@
 package ru.job4j.profession;
 
 public class Tools  extends Profession {
+    private String tools;
+    public Tools(){}
     public Tools(String tools) {
 
        super(tools);
@@ -8,7 +10,6 @@ public class Tools  extends Profession {
 
     @Override
     public String getTools() {
-
-        return tools;
+        return super.getTools();
     }
 }
