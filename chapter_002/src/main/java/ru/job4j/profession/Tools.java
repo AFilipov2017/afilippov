@@ -1,10 +1,12 @@
 package ru.job4j.profession;
 
-public class Tools  extends Profession {
-    public Tools(){}
+public class Tools extends Profession {
+    public Tools() {
+    }
+
     public Tools(String tools) {
 
-       super(tools);
+        super(tools);
     }
 
     @Override

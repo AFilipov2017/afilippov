@@ -1,8 +1,10 @@
 package ru.job4j.profession;
 
-public  class  Diagnose {
-private String description;
-public Diagnose(){}
+public class Diagnose {
+    private String description;
+
+    public Diagnose() {
+    }
 
     public Diagnose(String description) {
         this.description = description;

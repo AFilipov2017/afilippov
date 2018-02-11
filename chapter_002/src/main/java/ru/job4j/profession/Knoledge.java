@@ -2,7 +2,9 @@ package ru.job4j.profession;
 
 public class Knoledge {
     private String knoledge;
-    public Knoledge(){}
+
+    public Knoledge() {
+    }
 
     public Knoledge(String knoledge) {
         this.knoledge = knoledge;
