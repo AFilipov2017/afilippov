@@ -4,6 +4,7 @@ package ru.job4j.tracker.start;
  * @version 1
  * @since 06.02.2018
  */
+
 import ru.job4j.tracker.models.*;
 
 import java.util.*;
@@ -62,8 +63,9 @@ public class Tracker {
                 break;
             }
         }
+
         System.arraycopy(arr, b + 1, this.items, b, this.position - b);
-        this.items[position] = null;
+        this.position--;
     }
 
     /**
@@ -86,14 +88,18 @@ public class Tracker {
      * @param
      */
     public Item[] findByName(String key) {
-        Item[] res = new Item[this.position];
-        int b = 0;
+        Item[] first = new Item[this.position];
+        int index = 0;
+        int count = 0;
         for (int i = 0; i != this.position; i++) {
             if (this.items[i].getName().equals(key)) {
-                res[b] = this.items[i];
-                b++;
+                first[index] = this.items[i];
+                index++;
+                count++;
             }
         }
+        Item[] res = new Item[count];
+        System.arraycopy(first, 0, res, 0, count);
         return res;
     }
 

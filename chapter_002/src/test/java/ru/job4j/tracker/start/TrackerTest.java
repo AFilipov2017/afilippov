@@ -45,7 +45,7 @@ public class TrackerTest {
         tracker.add(itemThree);
         tracker.add(itemFour);
         tracker.delete(itemTwo.getId());
-        Item[] res = {itemOne, itemThree, itemFour, null};
+        Item[] res = {itemOne, itemThree, itemFour};
         assertThat(tracker.findAll(), is(res));
     }
 
@@ -62,7 +62,7 @@ public class TrackerTest {
         tracker.add(itemThree);
         tracker.add(itemFour);
         Item[] it = tracker.findByName("test3");
-        Item[] res = {itemThree, itemFour, null, null};
+        Item[] res = {itemThree, itemFour};
 
         assertThat(it, is(res));
     }
