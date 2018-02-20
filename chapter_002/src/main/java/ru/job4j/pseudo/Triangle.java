@@ -9,9 +9,12 @@ public class Triangle implements Shape {
     public String draw() {
         String separator = System.getProperty("line.separator");
         StringBuilder pic = new StringBuilder();
-        pic.append("   +" + separator);
-        pic.append("  + +" + separator);
-        pic.append(" +   +" + separator);
+        pic.append("   +");
+        pic.append(separator);
+        pic.append("  + +");
+        pic.append(separator);
+        pic.append(" +   +");
+        pic.append(separator);
         pic.append("+++++++");
         return pic.toString();
     }
