@@ -66,14 +66,23 @@ public class MenuTracker {
         this.actions[6] = this.new Exit();
     }
 
+    public int[] range() {
+        int[] arr = new int[this.actions.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = actions[i].key();
+        }
+        return arr;
+    }
+
     public void select(int key) {
         this.actions[key].execute(this.input, this.tracker);
     }
 
     public void show() {
         for (UserAction action : actions) {
-            if (action != null)
+            if (action != null) {
                 System.out.println(action.info());
+            }
         }
     }
 
@@ -155,7 +164,7 @@ public class MenuTracker {
 
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.findAll()) {
-
+                System.out.println("");
             }
         }
 

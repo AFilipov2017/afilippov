@@ -1,4 +1,5 @@
 package ru.job4j.tracker.start;
+
 /**
  * @version 1
  * @since 10.02.2018
@@ -15,6 +16,7 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+
     /**
      * Конструтор инициализирующий поля.
      *
@@ -30,13 +32,14 @@ public class StartUI {
      * Основной цикл программы.
      */
     public void init() {
-        Tracker tracker = new Tracker();
+
         MenuTracker menu = new MenuTracker(this.input, tracker);
+
         menu.fillAction();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Select:"));
-            menu.select(key);
+            //int key = Integer.valueOf(input.ask("Select:"));
+            menu.select(input.ask("Select", menu.range()));
         } while (!"y".equals(this.input.ask("Exit? (y/n)")));
     }
 
@@ -46,6 +49,6 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
