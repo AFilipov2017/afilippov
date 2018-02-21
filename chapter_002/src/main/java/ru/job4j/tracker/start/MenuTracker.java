@@ -163,9 +163,7 @@ public class MenuTracker {
         }
 
         public void execute(Input input, Tracker tracker) {
-            for (Item item : tracker.findAll()) {
-                System.out.println("");
-            }
+            System.out.println("");
         }
 
         public String info() {
