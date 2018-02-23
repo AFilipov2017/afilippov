@@ -4,10 +4,10 @@ import ru.job4j.tracker.models.Item;
 
 import java.util.Date;
 
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
 
-    public int key() {
-        return 2;
+    public EditItem(int key, String name) {
+        super(key, name);
     }
 
     public void execute(Input input, Tracker tracker) {
@@ -21,16 +21,12 @@ class EditItem implements UserAction {
         items.setId(id);
         tracker.replace(id, items);
     }
-
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit item.");
-    }
 }
 
-class FindItemByName implements UserAction {
+class FindItemByName extends BaseAction {
 
-    public int key() {
-        return 5;
+    public FindItemByName(int key, String name) {
+        super(key, name);
     }
 
     public void execute(Input input, Tracker tracker) {
@@ -40,16 +36,13 @@ class FindItemByName implements UserAction {
             System.out.println(String.format("id:%s, name:%s, desc:%s, creationTime:%d", index.getId(), index.getName(), index.getDescription(), index.created));
         }
     }
-
-    public String info() {
-        return String.format("%s. %s", this.key(), "Find item by name.");
-    }
 }
 
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
+    private int position = 0;
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -57,13 +50,17 @@ public class MenuTracker {
     }
 
     public void fillAction() {
-        this.actions[0] = this.new AddItem();
-        this.actions[1] = new MenuTracker.ShowAllItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new MenuTracker.DeleteItem();
-        this.actions[4] = this.new FindItemById();
-        this.actions[5] = new FindItemByName();
-        this.actions[6] = this.new Exit();
+        this.actions[position++] = this.new AddItem(0, "Add item");
+        this.actions[position++] = new MenuTracker.ShowAllItems(1, "Show all items");
+        this.actions[position++] = new EditItem(2, "Edit item");
+        this.actions[position++] = new MenuTracker.DeleteItem(3, "Delete item");
+        this.actions[position++] = this.new FindItemById(4, "Find item by id");
+        this.actions[position++] = new FindItemByName(5, "Find item by name");
+        this.actions[position++] = this.new Exit();
+    }
+
+    public void addAction(UserAction action) {
+        this.actions[position++] = action;
     }
 
     public int[] range() {
@@ -86,10 +83,10 @@ public class MenuTracker {
         }
     }
 
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
 
-        public int key() {
-            return 0;
+        public AddItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -100,16 +97,13 @@ public class MenuTracker {
             String[] comm = new String[10];
             tracker.add(new Item(name, desc, created, comm));
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
-        }
     }
 
-    private static class ShowAllItems implements UserAction {
 
-        public int key() {
-            return 1;
+    private static class ShowAllItems extends BaseAction {
+
+        public ShowAllItems(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -117,42 +111,30 @@ public class MenuTracker {
                 System.out.println(String.format("id:%s, name:%s, desc:%s, creationTime:%d", item.getId(), item.getName(), item.getDescription(), item.created));
             }
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all items.");
-        }
     }
 
-    private static class DeleteItem implements UserAction {
+    private static class DeleteItem extends BaseAction {
 
-        public int key() {
-            return 3;
+        public DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please enter task`s id: ");
             tracker.delete(id);
         }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete item.");
-        }
     }
 
-    private class FindItemById implements UserAction {
+    private class FindItemById extends BaseAction {
 
-        public int key() {
-            return 4;
+        public FindItemById(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please enter task`s id: ");
             Item item = tracker.findById(id);
             System.out.println(String.format("id:%s, name:%s, desc:%s, creationTime:%d", item.getId(), item.getName(), item.getDescription(), item.created));
-        }
-
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by Id.");
         }
     }
 
