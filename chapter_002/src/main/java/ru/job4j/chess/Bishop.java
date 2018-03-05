@@ -43,7 +43,7 @@ public class Bishop extends Figure {
     }
 
     @Override
-     public Figure copy(Cell dest) {
+     public  Figure copy(Cell dest) {
         return new Bishop(dest);
     }
 }

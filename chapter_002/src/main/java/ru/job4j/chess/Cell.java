@@ -1,8 +1,8 @@
 package ru.job4j.chess;
 
 public class Cell {
-    private int x;
-    private int y;
+        private int x;
+        private int y;
 
     public Cell(int x, int y) {
         this.x = x;
