@@ -1,10 +1,20 @@
 package ru.job4j.chess;
 
+/**
+ * @author Andrey Filippov (afilipov1980@gmail.com)
+ * @version 1
+ * @since 05.03.2018
+ */
 public class Bishop extends Figure {
     public Bishop(Cell position) {
         super(position);
     }
 
+    /**
+     * Метод определяет как должна ходить фигура Bishop.
+     *
+     * @param source, dest, rez итоговый массив возвращает путь фигуры.
+     */
     @Override
     Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         Cell[] rez = new Cell[Math.abs((source.getX() - dest.getX())) + 1];
@@ -43,7 +53,7 @@ public class Bishop extends Figure {
     }
 
     @Override
-     public  Figure copy(Cell dest) {
+    public Figure copy(Cell dest) {
         return new Bishop(dest);
     }
 }
