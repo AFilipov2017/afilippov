@@ -18,38 +18,28 @@ public class Bishop extends Figure {
     @Override
     Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         Cell[] rez = new Cell[Math.abs((source.getX() - dest.getX())) + 1];
-        int a = 0;
-        int c = source.getY();
-        int b = dest.getY();
+        int x = source.getX();
+        int y = source.getY();
+        int d = Integer.compare(source.getX(), dest.getX());
+        int f = Integer.compare(source.getY(), dest.getY());
         if (Math.abs(source.getX() - dest.getX()) == Math.abs(source.getY() - dest.getY())) {
-            if (source.getX() > dest.getX()) {
-                for (int i = source.getX(); i >= dest.getX(); i--) {
-                    rez[a] = new Cell(i, c);
-                    if (c < b) {
-                        c++;
-                    }
-                    if (c > b) {
-                        c--;
-                    }
-                    a++;
+            for (int j = 0; j < rez.length; j++) {
+                rez[j] = new Cell(x, y);
+                if (d == 1) {
+                    x--;
+                } else {
+                    x++;
                 }
-            } else {
-                for (int i = source.getX(); i <= dest.getX(); i++) {
-                    rez[a] = new Cell(i, c);
-                    if (c < b) {
-                        c++;
-                    }
-                    if (c > b) {
-                        c--;
-                    }
-                    a++;
+                if (f == 1) {
+                    y--;
+                } else {
+                    y++;
                 }
             }
-            return rez;
         } else {
-            throw new
-                    ImpossibleMoveException("Impossible move exception");
+            throw new ImpossibleMoveException("Impossible move");
         }
+        return rez;
     }
 
     @Override
