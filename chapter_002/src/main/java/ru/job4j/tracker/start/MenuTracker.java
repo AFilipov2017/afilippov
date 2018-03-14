@@ -2,7 +2,9 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 class EditItem extends BaseAction {
 
@@ -31,7 +33,7 @@ class FindItemByName extends BaseAction {
 
     public void execute(Input input, Tracker tracker) {
         String name = input.ask("Please enter task`s name: ");
-        Item[] item = tracker.findByName(name);
+        List<Item> item = tracker.findByName(name);
         for (Item index : item) {
             System.out.println(String.format("id:%s, name:%s, desc:%s, creationTime:%d", index.getId(), index.getName(), index.getDescription(), index.created));
         }
@@ -41,7 +43,7 @@ class FindItemByName extends BaseAction {
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[7];
+    private List<UserAction> actions = new ArrayList<>();
     private int position = 0;
 
     public MenuTracker(Input input, Tracker tracker) {
@@ -50,29 +52,29 @@ public class MenuTracker {
     }
 
     public void fillAction() {
-        this.actions[position++] = this.new AddItem(0, "Add item");
-        this.actions[position++] = new MenuTracker.ShowAllItems(1, "Show all items");
-        this.actions[position++] = new EditItem(2, "Edit item");
-        this.actions[position++] = new MenuTracker.DeleteItem(3, "Delete item");
-        this.actions[position++] = this.new FindItemById(4, "Find item by id");
-        this.actions[position++] = new FindItemByName(5, "Find item by name");
-        this.actions[position++] = this.new Exit();
+        this.actions.add(position++, this.new AddItem(0, "Add item"));
+        this.actions.add(position++, new MenuTracker.ShowAllItems(1, "Show all items"));
+        this.actions.add(position++, new EditItem(2, "Edit item"));
+        this.actions.add(position++, new MenuTracker.DeleteItem(3, "Delete item"));
+        this.actions.add(position++, this.new FindItemById(4, "Find item by id"));
+        this.actions.add(position++, new FindItemByName(5, "Find item by name"));
+        this.actions.add(position++, this.new Exit());
     }
 
     public void addAction(UserAction action) {
-        this.actions[position++] = action;
+        this.actions.add(action);
     }
 
-    public int[] range() {
-        int[] arr = new int[this.actions.length];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = actions[i].key();
+    public List<Integer> range() {
+        List<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < actions.size(); i++) {
+            arr.add(i, actions.get(i).key());
         }
         return arr;
     }
 
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     public void show() {

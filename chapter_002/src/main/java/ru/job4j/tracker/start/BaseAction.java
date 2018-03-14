@@ -7,6 +7,7 @@ public abstract class BaseAction implements UserAction {
     protected BaseAction(final int key, final String name) {
         this.key = key;
         this.name = name;
+
     }
 
     @Override

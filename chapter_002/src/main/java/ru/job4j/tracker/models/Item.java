@@ -29,6 +29,7 @@ public class Item {
     public String setId(String id) {
         this.id = id;
 		return id;
+
     }
 
     public String getName() {
