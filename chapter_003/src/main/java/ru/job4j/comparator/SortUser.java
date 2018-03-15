@@ -11,7 +11,7 @@ public class SortUser {
     /**
      * Метод возвращает TreeSet пользователей, отсортированных по возрасту в порядке возрастания.
      *
-     * @param list список имен и возрастов.
+     * @param list список имен и возраст.
      */
     public Set<User> sort(List<User> list) {
         Set<User> user = new TreeSet<>();

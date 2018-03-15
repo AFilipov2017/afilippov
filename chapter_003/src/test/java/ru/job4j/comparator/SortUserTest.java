@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
- * @version 1
+ * @version 1.0
  * @since 15.03.2018
  */
 public class SortUserTest {
