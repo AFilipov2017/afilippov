@@ -1,8 +1,5 @@
 package ru.job4j.chess;
 
-import com.sun.deploy.util.ArrayUtil;
-
-import java.util.Arrays;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
@@ -29,14 +26,14 @@ public class Board {
      * @param source, dest начальная и конечная ячейки хода фигуры.
      */
     boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
-        boolean rez = false;
+        boolean result = false;
 
         for (int i = 0; i < this.position; i++) {
             if (figures[i].position.getX() == source.getX() && figures[i].position.getY() == source.getY()) {
-                rez = true;
+                result = true;
             }
         }
-        if (!rez) {
+        if (!result) {
             throw new FigureNotFoundException("Figure not found");
         }
         if (source.getY() <= 0 || source.getY() > 8 || source.getX() <= 0 || source.getX() > 8
@@ -53,7 +50,7 @@ public class Board {
             }
         }
         figures[index] = figures[index].copy(dest);
-        return rez;
+        return result;
     }
 
     int indexOf(Cell cell) {

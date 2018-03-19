@@ -17,29 +17,23 @@ public class Bishop extends Figure {
      */
     @Override
     Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        Cell[] rez = new Cell[Math.abs((source.getX() - dest.getX())) + 1];
-        int x = source.getX();
-        int y = source.getY();
-        int d = Integer.compare(source.getX(), dest.getX());
-        int f = Integer.compare(source.getY(), dest.getY());
+        Cell[] result = new Cell[Math.abs((source.getX() - dest.getX())) + 1];
+        int coordX = source.getX();
+        int coordY = source.getY();
+        int deltaX = Integer.compare(source.getX(), dest.getX());
+        int deltaY = Integer.compare(source.getY(), dest.getY());
         if (Math.abs(source.getX() - dest.getX()) == Math.abs(source.getY() - dest.getY())) {
-            for (int j = 0; j < rez.length; j++) {
-                rez[j] = new Cell(x, y);
-                if (d == 1) {
-                    x--;
-                } else {
-                    x++;
-                }
-                if (f == 1) {
-                    y--;
-                } else {
-                    y++;
-                }
-            }
+            int i = 0;
+            do {
+                result[i] = new Cell(coordX, coordY);
+                coordX = deltaX == 1 ? coordX - 1 : coordX + 1;
+                coordY = deltaY == 1 ? coordY - 1 : coordY + 1;
+                i++;
+            } while (i < result.length);
         } else {
             throw new ImpossibleMoveException("Impossible move");
         }
-        return rez;
+        return result;
     }
 
     @Override
