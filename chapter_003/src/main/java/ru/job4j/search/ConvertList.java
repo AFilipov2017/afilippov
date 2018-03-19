@@ -40,14 +40,13 @@ public class ConvertList {
         return arr;
     }
 
-
-    public List<Integer> convert (List<int[]> list) {
-        List<Integer> rez = new ArrayList<>();
-        for (int [] i: list             ) {
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] i : list) {
             for (int z : i) {
-                rez.add(z);
+                result.add(z);
             }
         }
-        return rez;
+        return result;
     }
 }

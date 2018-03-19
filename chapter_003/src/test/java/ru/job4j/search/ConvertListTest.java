@@ -78,7 +78,7 @@ public class ConvertListTest {
     @Test
     public void whenListArraysConvertList() {
         ConvertList convertList = new ConvertList();
-        List<int []> list = new ArrayList<>();
+        List<int[]> list = new ArrayList<>();
         list.add(new int[]{1, 2});
         list.add(new int[]{3, 4, 5, 6});
         List<Integer> result = convertList.convert(list);

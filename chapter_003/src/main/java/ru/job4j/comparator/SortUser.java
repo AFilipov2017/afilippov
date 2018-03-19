@@ -31,7 +31,7 @@ public class SortUser {
                 return Integer.compare(o1.getName().length(), (o2.getName().length()));
             }
         });
-        return null;
+        return list;
     }
 
     /**
@@ -43,12 +43,12 @@ public class SortUser {
         list.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                int result = Integer.compare(o1.getName().length(), (o2.getName().length()));
-
+                int result = o1.getName().compareTo(o2.getName());
                 return result != 0 ? result : Integer.compare(o1.getAge(), o2.getAge());
             }
         });
-        return null;
+        return list;
     }
 }
+
 
