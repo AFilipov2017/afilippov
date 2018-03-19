@@ -19,15 +19,12 @@ public class PriorityQueue {
      */
     public void put(Task task) {
         if (tasks.size() == 0) {
-            tasks.add(0, task);
+            tasks.add(task);
         } else {
-            if (task.getPriority() >= tasks.getLast().getPriority()) {
-                tasks.add(task);
-            } else {
-                for (int i = tasks.size() - 1; i >= 0; i--) {
-                    if (task.getPriority() <= tasks.get(i).getPriority()) {
-                        tasks.add(i, task);
-                    }
+            for (int i = 0; i < tasks.size(); i++) {
+                if (task.getPriority() <= tasks.get(i).getPriority()) {
+                    tasks.add(i, task);
+                    break;
                 }
             }
         }
@@ -37,3 +34,5 @@ public class PriorityQueue {
         return this.tasks.poll();
     }
 }
+
+
