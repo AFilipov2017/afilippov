@@ -18,22 +18,20 @@ public class ListCompare implements Comparator<String> {
         int result = 0;
         List<Character> one = new ArrayList<>();
         List<Character> two = new ArrayList<>();
-// Создаем списки символов
         for (char symbol : left.toCharArray()) {
             one.add(symbol);
         }
         for (char symbol2 : right.toCharArray()) {
             two.add(symbol2);
         }
-// Сравниваем элементы списков. Результат сравнения принимает переменная res.
-// Переменная index суммирует все значения res.
+
         int loopSize = one.size() == two.size() ? one.size() : one.size() < two.size() ? one.size() : two.size();
         int index = 0;
         for (int i = 0; i < loopSize; i++) {
             int res = one.get(i) == two.get(i) ? 0 : one.get(i) < two.get(i) ? -1 : 1;
             index += res;
         }
-// Определяем дельту index и возвращаем результат.
+
         if (index == 0) {
             result = one.size() == two.size() ? result : one.size() < two.size() ? -1 : 1;
         } else {
