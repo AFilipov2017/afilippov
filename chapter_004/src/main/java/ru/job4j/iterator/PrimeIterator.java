@@ -36,7 +36,7 @@ public class PrimeIterator implements Iterator<Integer> {
         return values[index++];
     }
 
-    public static boolean isPrime(int num) {
+    public boolean isPrime(int num) {
         boolean result = true;
         if (num < 2) {
             result = false;
