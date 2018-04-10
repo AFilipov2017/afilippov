@@ -16,11 +16,12 @@ public class Converter {
             @Override
             public boolean hasNext() {
                 if (index.hasNext()) {
-                     return true;
-                 }else{
-                if(it.hasNext()){
-                    index = it.next();
-                }}
+                    return true;
+                } else {
+                    if (it.hasNext()) {
+                        index = it.next();
+                    }
+                }
                 return index.hasNext();
             }
 
