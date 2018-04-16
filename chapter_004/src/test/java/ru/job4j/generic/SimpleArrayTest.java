@@ -80,4 +80,16 @@ public class SimpleArrayTest {
         assertThat(it.next(), is(6));
         assertThat(it.hasNext(), is(false));
     }
+
+    @Test
+    public void whenGetIndex() {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(new Object[5]);
+        simpleArray.add(1);
+        simpleArray.add(2);
+        simpleArray.add(3);
+        simpleArray.add(4);
+        simpleArray.add(5);
+        Object result = simpleArray.getIndex(simpleArray.get(1));
+        assertThat(result, is(1));
+    }
 }

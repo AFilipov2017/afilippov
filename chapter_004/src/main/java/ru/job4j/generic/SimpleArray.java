@@ -1,5 +1,6 @@
 package ru.job4j.generic;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -32,6 +33,9 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public Object get(int index) {
         return objects[index];
+    }
+    public int getIndex(Object object) {
+        return Arrays.asList(objects).indexOf(object);
     }
 
     @Override
