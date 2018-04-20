@@ -21,7 +21,7 @@ public class RoleStoreTest {
         roleStore.add(role);
         roleStore.add(role2);
         roleStore.add(role3);
-        Role result = roleStore.getModel(0);
+        Base result = roleStore.getModel(0);
         assertThat(result, is(role));
     }
 
@@ -34,7 +34,7 @@ public class RoleStoreTest {
         roleStore.add(role);
         roleStore.add(role2);
         roleStore.replace("2", role3);
-        Role result = roleStore.getModel(1);
+        Base result = roleStore.getModel(1);
         assertThat(result, is(role3));
     }
 
@@ -48,7 +48,7 @@ public class RoleStoreTest {
         roleStore.add(role2);
         roleStore.add(role3);
         roleStore.delete("2");
-        Role result = roleStore.getModel(1);
+        Base result = roleStore.getModel(1);
         assertThat(result, is(role3));
     }
 
@@ -61,7 +61,7 @@ public class RoleStoreTest {
         roleStore.add(role);
         roleStore.add(role2);
         roleStore.add(role3);
-        Role result = roleStore.findById("2");
+        Base result = roleStore.findById("2");
         assertThat(result, is(role2));
     }
 }

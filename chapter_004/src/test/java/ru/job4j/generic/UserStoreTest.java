@@ -1,8 +1,10 @@
 package ru.job4j.generic;
+
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 1
@@ -18,7 +20,7 @@ public class UserStoreTest {
         userStore.add(user);
         userStore.add(user2);
         userStore.add(user3);
-        User result = userStore.getModel(0);
+        Base result = userStore.getModel(0);
         assertThat(result, is(user));
     }
 
@@ -31,7 +33,7 @@ public class UserStoreTest {
         userStore.add(user);
         userStore.add(user2);
         userStore.replace("2", user3);
-        User result = userStore.getModel(1);
+        Base result = userStore.getModel(1);
         assertThat(result, is(user3));
     }
 
@@ -45,7 +47,7 @@ public class UserStoreTest {
         userStore.add(user2);
         userStore.add(user3);
         userStore.delete("2");
-        User result = userStore.getModel(1);
+        Base result = userStore.getModel(1);
         assertThat(result, is(user3));
     }
 
@@ -58,7 +60,7 @@ public class UserStoreTest {
         userStore.add(user);
         userStore.add(user2);
         userStore.add(user3);
-        User result = userStore.findById("2");
+        Base result = userStore.findById("2");
         assertThat(result, is(user2));
     }
 }
