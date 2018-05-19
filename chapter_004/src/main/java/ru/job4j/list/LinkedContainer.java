@@ -2,11 +2,13 @@ package ru.job4j.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+
+
 import java.util.NoSuchElementException;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
- * @version 0.1
+ * @version 0.2
  * @since 14.05.2018
  */
 public class LinkedContainer<E> implements Iterable<E> {
@@ -22,11 +24,28 @@ public class LinkedContainer<E> implements Iterable<E> {
         firstNode = new Node<>(null, lastNode, null);
     }
 
+    public Node<E> getFirstNode() {
+        return firstNode;
+    }
+
+    public Node<E> getLastNode() {
+        return lastNode;
+    }
+
     public void add(E value) {
         Node<E> prev = lastNode;
         prev.setElement(value);
         lastNode = new Node<>(null, null, prev);
         prev.setNext(lastNode);
+        modCount++;
+        size++;
+    }
+
+    public void addFirst(E value) {
+        Node<E> next = firstNode;
+        next.setElement(value);
+        firstNode = new Node<>(null, next, null);
+        next.setPrev(firstNode);
         modCount++;
         size++;
     }
@@ -37,6 +56,42 @@ public class LinkedContainer<E> implements Iterable<E> {
             target = target.getNext();
         }
         return target.getElement();
+    }
+
+    public E unlinkFirst(Node<E> f) {
+        final E element = f.element;
+        final Node<E> next = f.next;
+        f.element = null;
+        f.next = null;
+        firstNode = next;
+        if (next == null) {
+            lastNode = null;
+        } else {
+            next.prev = null;
+        }
+        size--;
+        modCount++;
+        return element;
+    }
+
+    public E unlinkLast(Node<E> l) {
+        final E element = l.element;
+        final Node<E> prev = l.prev;
+        l.element = null;
+        l.prev = null;
+        lastNode = prev;
+        if (prev == null) {
+            firstNode = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+        modCount++;
+        return element;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
