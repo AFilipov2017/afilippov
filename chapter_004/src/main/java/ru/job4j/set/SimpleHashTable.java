@@ -17,11 +17,9 @@ public class SimpleHashTable<E> implements Iterable<E> {
     private int newHash;
     private int size = 0;
 
-
     public SimpleHashTable() {
         this.hashTable = new Object[defaultSize];
     }
-
 
     public int hash(E e) {
         hash = 31;
@@ -55,6 +53,15 @@ public class SimpleHashTable<E> implements Iterable<E> {
         return index;
     }
 
+    public boolean contains(E e) {
+        boolean result = false;
+        int index = hash(e) % hashTable.length;
+        if (e.equals(hashTable[index])) {
+            result = true;
+        }
+        return result;
+    }
+
     public boolean remove(E e) {
         boolean result = false;
         for (int i = 0; i < hashTable.length; i++) {
@@ -68,7 +75,6 @@ public class SimpleHashTable<E> implements Iterable<E> {
         modCount++;
         return result;
     }
-
 
     public void checkTheSizeArray() {
         int minSize = defaultSize;

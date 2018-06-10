@@ -26,14 +26,7 @@ public class SimpleHashSet<E> implements Iterable<E> {
     }
 
     public boolean contains(E e) {
-        boolean result = false;
-        for (Object o : hashTable
-                ) {
-            if (e.equals(o)) {
-                result = true;
-            }
-        }
-        return result;
+        return hashTable.contains(e);
     }
 
     public boolean remove(E e) {
