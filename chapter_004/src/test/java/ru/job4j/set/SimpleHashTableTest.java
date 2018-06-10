@@ -31,8 +31,8 @@ public class SimpleHashTableTest {
         SimpleHashTable<String> list = new SimpleHashTable<>();
         list.add("One");
         list.add("Two");
-        boolean result = list.contains("Tree");
-        assertThat(result, is(false));
+        boolean result = list.contains("Two");
+        assertThat(result, is(true));
     }
 
     @Test

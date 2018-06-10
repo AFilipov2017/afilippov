@@ -27,8 +27,8 @@ public class SimpleHashSetTest {
         SimpleHashSet<String> list = new SimpleHashSet<>();
         list.add("One");
         list.add("Two");
-        boolean result = list.contains("Tree");
-        assertThat(result, is(false));
+        boolean result = list.contains("Two");
+        assertThat(result, is(true));
     }
 
     @Test
