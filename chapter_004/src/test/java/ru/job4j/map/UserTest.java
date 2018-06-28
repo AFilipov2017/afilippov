@@ -22,6 +22,7 @@ public class UserTest {
         User user = new User("Alex", 2, new GregorianCalendar(1980, 05, 02));
         User userTwo = new User("Alex", 2, new GregorianCalendar(1980, 05, 02));
         Map<User, Object> map = new HashMap<>();
+
         map.put(user, new Object());
         map.put(userTwo, new Object());
         System.out.println(map);
