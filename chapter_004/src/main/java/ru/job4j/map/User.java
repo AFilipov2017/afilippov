@@ -1,6 +1,7 @@
 package ru.job4j.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
@@ -47,11 +48,14 @@ public class User {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = 31 * hash + getName().hashCode();
-        hash = 31 * hash + getChildren();
-        hash = 31 * hash + getBirthday().hashCode();
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
     }
 }

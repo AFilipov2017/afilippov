@@ -18,17 +18,14 @@ import java.util.Map;
 public class UserTest {
 
     @Test
-    public void NotOverrideEquals() {
+    public void notOverrideHashCode() {
         User user = new User("Alex", 2, new GregorianCalendar(1980, 05, 02));
         User userTwo = new User("Alex", 2, new GregorianCalendar(1980, 05, 02));
         Map<User, Object> map = new HashMap<>();
         map.put(user, new Object());
         map.put(userTwo, new Object());
         System.out.println(map);
-        int us = user.getHash();
-        int usTwo = userTwo.getHash();
-        boolean result = us == usTwo;
+        boolean result = user.equals(userTwo);
         assertThat(result, is(true));
     }
-
 }
