@@ -41,4 +41,17 @@ public class User {
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
+
+    public int getHash() {
+        return hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + getName().hashCode();
+        hash = 31 * hash + getChildren();
+        hash = 31 * hash + getBirthday().hashCode();
+        return hash;
+    }
 }
