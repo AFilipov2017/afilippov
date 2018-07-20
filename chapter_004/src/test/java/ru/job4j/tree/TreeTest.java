@@ -18,7 +18,7 @@ public class TreeTest {
         Tree<Integer> tree = new Tree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
-        tree.add(1, 4);
+        tree.add(3, 4);
         tree.add(4, 5);
         tree.add(5, 6);
         assertThat(
@@ -78,11 +78,11 @@ public class TreeTest {
     public void checkIsBinaryTwo() {
         Tree<Integer> tree = new Tree<>(1);
         tree.add(1, 2);
-        tree.add(2, 3);
+        tree.add(1, 3);
         tree.add(2, 4);
-        tree.add(4, 5);
-        tree.add(5, 6);
+        tree.add(2, 5);
+        tree.add(2, 6);
         boolean result = tree.isBinary();
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
 }
