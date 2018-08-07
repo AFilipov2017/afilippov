@@ -28,14 +28,5 @@ public class CoffeeMachine {
         result = list.toArray(result);
         return result;
     }
-
-    public static void main(String[] args) {
-        CoffeeMachine coffeeMachine = new CoffeeMachine();
-        Integer[] result = coffeeMachine.changes(73, 30);
-        for (Integer i : result
-                ) {
-            System.out.println(i);
-        }
-    }
 }
 
