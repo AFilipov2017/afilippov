@@ -1,5 +1,7 @@
 package ru.job4j.additionaltask;
 
+import java.util.Arrays;
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 0.1
@@ -18,6 +20,8 @@ public class EqualString {
         } else {
             char[] one = o.toCharArray();
             char[] two = t.toCharArray();
+            Arrays.sort(one);
+            Arrays.sort(two);
 
             for (int i = 0; i < size; i++) {
                 if (one[i] != two[i]) {

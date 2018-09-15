@@ -18,7 +18,7 @@ public class EqualStringTest {
         String o = "mama";
         String t = "amam";
         boolean result = eqs.equalsString(o, t);
-        assertThat(result, is(false));
+        assertThat(result, is(true));
     }
 
     @Test
