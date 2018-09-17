@@ -15,8 +15,8 @@ public class EqualStringTest {
     @Test
     public void whenToCompareTwoDifferentStrings() {
         EqualString eqs = new EqualString();
-        String o = "mama";
-        String t = "amam";
+        String o = "maman";
+        String t = "amamn";
         boolean result = eqs.equalsString(o, t);
         assertThat(result, is(true));
     }

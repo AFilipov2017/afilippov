@@ -1,6 +1,7 @@
 package ru.job4j.additionaltask;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
@@ -10,7 +11,6 @@ import java.util.Arrays;
 public class EqualString {
 
     public boolean equalsString(String o, String t) {
-        int size = Integer.min(o.length(), t.length());
         boolean result = true;
         if (o == t) {
             return true;
@@ -18,15 +18,14 @@ public class EqualString {
         if (o.length() != t.length()) {
             result = false;
         } else {
-            char[] one = o.toCharArray();
-            char[] two = t.toCharArray();
-            Arrays.sort(one);
-            Arrays.sort(two);
-
-            for (int i = 0; i < size; i++) {
-                if (one[i] != two[i]) {
-                    result = false;
-                }
+            Map<Character, Object> mpOne = new HashMap<>();
+            Map<Character, Object> mpTwo = new HashMap<>();
+            for (int i = 0; i < o.length(); i++) {
+                mpOne.put(o.toCharArray()[i], null);
+                mpTwo.put(t.toCharArray()[i], null);
+            }
+            if (!mpOne.equals(mpTwo)) {
+                result = false;
             }
         }
         return result;
