@@ -21,8 +21,8 @@ public class EqualString {
             Map<Character, Object> mpOne = new HashMap<>();
             Map<Character, Object> mpTwo = new HashMap<>();
             for (int i = 0; i < o.length(); i++) {
-                mpOne.put(o.toCharArray()[i], null);
-                mpTwo.put(t.toCharArray()[i], null);
+                mpOne.put(o.charAt(i), null);
+                mpTwo.put(t.charAt(i), null);
             }
             if (!mpOne.equals(mpTwo)) {
                 result = false;
