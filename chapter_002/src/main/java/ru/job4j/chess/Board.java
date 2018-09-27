@@ -1,6 +1,8 @@
 package ru.job4j.chess;
 
 
+import java.util.function.Predicate;
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 1
@@ -34,8 +36,7 @@ public class Board {
         if (!result) {
             throw new FigureNotFoundException("Figure not found");
         }
-        if (source.getY() <= 0 || source.getY() > 8 || source.getX() <= 0 || source.getX() > 8
-                || dest.getY() <= 0 || dest.getY() > 8 || dest.getX() <= 0 || dest.getX() > 8) {
+        if (impossMove(source.getX(), source.getY(), dest.getX(), dest.getY())) {
             throw new ImpossibleMoveException("Impossible move exception.");
         }
         Cell[] way = figures[index].way(source, dest);
@@ -58,6 +59,11 @@ public class Board {
             }
         }
         return index;
+    }
+
+    public boolean impossMove(int a, int b, int c, int d) {
+        Predicate<Integer> predicate = (n) -> n <= 0 || n > 8;
+        return predicate.test(a) || predicate.test(b) || predicate.test(c) || predicate.test(d);
     }
 }
 

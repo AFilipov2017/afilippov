@@ -70,7 +70,7 @@ public class BoardTest {
         Figure[] f = new Figure[1];
         Board board = new Board(f);
         board.add(bishop);
-        Cell dest = new Cell(0, 7);
+        Cell dest = new Cell(0, 8);
         board.move(bishop.position, dest);
     }
 
