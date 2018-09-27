@@ -8,17 +8,28 @@ package ru.job4j.tracker.start;
 import ru.job4j.tracker.models.*;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Tracker {
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items;
     private int position = 0;
     private static final Random RAND = new Random();
+
+    public Tracker() {
+        this.items = new ArrayList<>();
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
 
     /**
      * Метод добавляет заявку, переданную в аргументах в массив заявок this.items.
      *
      * @param
      */
+
+
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items.add(item);
@@ -80,9 +91,10 @@ public class Tracker {
      */
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
-        for (int i = 0; i != this.items.size(); i++) {
-            if (this.items.get(i).getName().equals(key)) {
-                result.add(this.items.get(i));
+        Predicate<String> predicate = (x) -> x.equals(key);
+        for (Item item : items) {
+            if (predicate.test(item.getName())) {
+                result.add(item);
             }
         }
         return result;
@@ -96,8 +108,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
+        Predicate<String> predicate = (x) -> x.equals(id);
         for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
+            if (item != null && predicate.test(item.getId())) {
                 result = item;
                 break;
             }
