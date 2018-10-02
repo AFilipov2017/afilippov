@@ -1,6 +1,8 @@
 package ru.job4j.search;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
@@ -18,16 +20,10 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        if (tasks.size() == 0) {
-            tasks.add(task);
-        } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                if (task.getPriority() <= tasks.get(i).getPriority()) {
-                    tasks.add(i, task);
-                    break;
-                }
-            }
-        }
+        tasks.add(task);
+        List<Task> list = tasks.stream().sorted((o1, o2) -> Integer.compare(o1.getPriority(), o2.getPriority())).collect(Collectors.toList());
+        tasks.clear();
+        tasks.addAll(list);
     }
 
     public Task take() {

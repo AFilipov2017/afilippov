@@ -1,9 +1,8 @@
 package ru.job4j.search;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
@@ -13,11 +12,13 @@ import java.util.List;
 public class ConvertList {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
-        for (int[] i : array) {
-            for (int j : i) {
-                list.add(j);
+        Stream<int[]> arr = Arrays.stream(array);
+        Iterator<int[]> split = arr.iterator();
+        split.forEachRemaining((n) -> {
+            for (Integer c : n) {
+                list.add(c);
             }
-        }
+        });
         return list;
     }
 
@@ -31,7 +32,8 @@ public class ConvertList {
         }
 
         int[][] arr = new int[rows][cell];
-        Iterator<Integer> iterator = list.listIterator();
+        Stream<Integer> str = list.stream();
+        Iterator<Integer> iterator = str.iterator();
         for (int[] i : arr) {
             for (int j = 0; j < i.length; j++) {
                 i[j] = iterator.hasNext() ? iterator.next() : 0;
@@ -42,11 +44,13 @@ public class ConvertList {
 
     public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();
-        for (int[] i : list) {
-            for (int z : i) {
-                result.add(z);
+        Stream<int[]> str = list.stream();
+        Iterator<int[]> split = str.iterator();
+        split.forEachRemaining((n) -> {
+            for (Integer c : n) {
+                result.add(c);
             }
-        }
+        });
         return result;
     }
 }

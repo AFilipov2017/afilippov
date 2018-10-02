@@ -17,7 +17,7 @@ import java.util.List;
 public class UserConvertTest {
     @Test
     public void whenListConvertToMap() {
-        User user = new User(1, "name1", "Moscow");
+        User user = new User(1, "name", "Moscow");
         User user1 = new User(2, "name2", "St.Peterburg");
         List<User> list = new ArrayList<>();
         list.add(user);
@@ -42,5 +42,4 @@ public class UserConvertTest {
         String result = a.get(1).getCity();
         assertThat(result, is("Moscow"));
     }
-
 }

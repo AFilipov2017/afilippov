@@ -54,8 +54,8 @@ public class SortUserTest {
         list.addAll(list1);
         SortUser sort = new SortUser();
         sort.sortByAllFields(list);
-        int result = list.get(0).getAge();
-        assertThat(result, is(30));
+        int result = list.get(1).getAge();
+        assertThat(result, is(31));
     }
 
     @Test

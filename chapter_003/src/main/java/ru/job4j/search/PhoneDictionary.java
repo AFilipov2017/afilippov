@@ -3,6 +3,8 @@ package ru.job4j.search;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
@@ -10,7 +12,7 @@ import java.lang.*;
  * @since 11.02.2018
  */
 public class PhoneDictionary {
-    private List<Person> persons = new ArrayList<Person>();
+    private List<Person> persons = new ArrayList<>();
 
     public void add(Person person) {
         this.persons.add(person);
@@ -23,12 +25,10 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<>();
-        for (Person rez : persons) {
-            if (key.contains(rez.getName()) || key.contains(rez.getSurname()) || key.contains(rez.getPhone()) || key.contains(rez.getAddress())) {
-                result.add(rez);
-            }
-        }
-        return result;
+        List<Person> list = persons.stream().filter(n -> n.getName().contains(key)
+                || n.getSurname().contains(key)
+                || n.getPhone().contains(key)
+                || n.getAddress().contains(key)).collect(Collectors.toList());
+        return list;
     }
 }

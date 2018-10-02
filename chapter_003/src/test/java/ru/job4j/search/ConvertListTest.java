@@ -30,11 +30,11 @@ public class ConvertListTest {
     @Test
     public void whenArrayConvertToListTwo() {
         ConvertList convertList = new ConvertList();
-        int[][] a = new int[][]{{1, 2}, {3, 4}, {5, 6}};
+        int[][] a = new int[][]{{1, 3}, {2, 4}, {5, 6}};
         List<Integer> list = new ArrayList<>();
         list.add(1);
-        list.add(2);
         list.add(3);
+        list.add(2);
         list.add(4);
         list.add(5);
         list.add(6);
