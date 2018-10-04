@@ -1,7 +1,9 @@
 package ru.job4j.chess;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -20,20 +22,17 @@ public class Bishop extends Figure {
      * @param source, dest, rez итоговый массив возвращает путь фигуры.
      */
     @Override
-    Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        Cell[] result = new Cell[Math.abs((source.getX() - dest.getX())) + 1];
-        int coordX = source.getX();
-        int coordXd = dest.getX();
-        int coordY = source.getY();
-        int coordYd = dest.getY();
+    List<Cell> way(Cell source, Cell dest) throws ImpossibleMoveException {
+        List<Cell> result = new ArrayList<>();
+        int loop = Math.abs((source.getX() - dest.getX())) + 1;
         if (Math.abs(source.getX() - dest.getX()) == Math.abs(source.getY() - dest.getY())) {
             int i = 0;
             do {
-                result[i] = new Cell(coordX, coordY);
-                coordX = changeCoord(coordX, coordXd);
-                coordY = changeCoord(coordY, coordYd);
+                result.add(new Cell(source.getX(), source.getY()));
+                source.setX(changeCoord(source.getX(), dest.getX()));
+                source.setY(changeCoord(source.getY(), dest.getY()));
                 i++;
-            } while (i < result.length);
+            } while(i != loop);
         } else {
             throw new ImpossibleMoveException("Impossible move");
         }

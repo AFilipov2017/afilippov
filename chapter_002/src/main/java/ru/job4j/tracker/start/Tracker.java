@@ -8,6 +8,7 @@ package ru.job4j.tracker.start;
 import ru.job4j.tracker.models.*;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Tracker {
@@ -28,8 +29,6 @@ public class Tracker {
      *
      * @param
      */
-
-
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items.add(item);
@@ -92,11 +91,9 @@ public class Tracker {
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         Predicate<String> predicate = (x) -> x.equals(key);
-        for (Item item : items) {
-            if (predicate.test(item.getName())) {
-                result.add(item);
-            }
-        }
+        items.forEach((n) -> {if (n != null && predicate.test(n.getName()) || n != null && predicate.test(n.getId())) {
+            result.add(n);
+        }});
         return result;
     }
 
@@ -107,14 +104,6 @@ public class Tracker {
      * @param
      */
     public Item findById(String id) {
-        Item result = null;
-        Predicate<String> predicate = (x) -> x.equals(id);
-        for (Item item : this.items) {
-            if (item != null && predicate.test(item.getId())) {
-                result = item;
-                break;
-            }
-        }
-        return result;
+        return findByName(id).get(0);
     }
 }

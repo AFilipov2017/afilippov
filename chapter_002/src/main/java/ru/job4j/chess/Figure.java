@@ -1,5 +1,7 @@
 package ru.job4j.chess;
 
+import java.util.List;
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 1
@@ -12,7 +14,7 @@ public abstract class Figure {
         this.position = position;
     }
 
-    abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
+    abstract List<Cell> way(Cell source, Cell dest) throws ImpossibleMoveException;
 
     abstract Figure copy(Cell dest);
 }

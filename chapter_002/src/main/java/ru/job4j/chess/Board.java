@@ -1,6 +1,7 @@
 package ru.job4j.chess;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -8,17 +9,16 @@ import java.util.function.Predicate;
  * @version 1
  * @since 05.03.2018
  */
-
 public class Board {
-    private Figure[] figures = new Figure[32];
-    private int position = 0;
+    private List<Figure> figures = new ArrayList<>();
+    private int ind = 0;
 
-    public Board(Figure[] figures) {
+    public Board(List<Figure> figures) {
         this.figures = figures;
     }
 
     public Figure add(Figure figure) {
-        this.figures[this.position++] = figure;
+        this.figures.add(figure);
         return figure;
     }
 
@@ -30,40 +30,34 @@ public class Board {
     boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean result = false;
         int index = indexOf(source);
-        if (figures[index].position.getX() == source.getX() && figures[index].position.getY() == source.getY()) {
+        if (figures.get(index).position.getX() == source.getX() && figures.get(index).position.getY() == source.getY()) {
             result = true;
         }
         if (!result) {
             throw new FigureNotFoundException("Figure not found");
         }
-        if (impossMove(source.getX(), source.getY(), dest.getX(), dest.getY())) {
+        Predicate<Integer> p = n -> n > 8 || n <= 0;
+        if (p.test(source.getX()) || p.test(source.getY()) || p.test(dest.getX()) || p.test(dest.getY())) {
             throw new ImpossibleMoveException("Impossible move exception.");
         }
-        Cell[] way = figures[index].way(source, dest);
-        for (int j = 1; j < way.length; j++) {
-            for (int k = 0; k < this.position; k++) {
-                if (figures[k].position.getX() == way[j].getX() && figures[k].position.getY() == way[j].getY()) {
-                    throw new OccupiedWayException("Occupied way.");
-                }
+
+        List<Cell> way = figures.get(index).way(source, dest);
+        way.forEach(m -> figures.forEach(n -> {
+            if (n.position.getX() == m.getX() && n.position.getY() == m.getY()) {
+                throw new OccupiedWayException("Occupied way.");
             }
-        }
-        figures[index] = figures[index].copy(dest);
+        }));
+        figures.set(index, figures.get(index).copy(dest));
         return result;
     }
 
     int indexOf(Cell cell) {
-        int index = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (cell.getX() == figures[i].position.getX() && cell.getY() == figures[i].position.getY()) {
-                index = i;
+        figures.forEach(n -> {
+            if (cell.getX() == n.position.getX() && cell.getY() == n.position.getY()) {
+                ind = figures.indexOf(n);
             }
-        }
-        return index;
-    }
-
-    public boolean impossMove(int a, int b, int c, int d) {
-        Predicate<Integer> predicate = (n) -> n <= 0 || n > 8;
-        return predicate.test(a) || predicate.test(b) || predicate.test(c) || predicate.test(d);
+        });
+        return ind;
     }
 }
 

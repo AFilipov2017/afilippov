@@ -20,7 +20,7 @@ public class TrackerTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
         String[] comm = new String[10];
-        Item item = new Item("test1", "testDescription", 123L, comm);
+        Item item = new Item("test", "testDescription", 123L, comm);
         tracker.add(item);
         assertThat(tracker.findAll().get(0), is(item));
     }

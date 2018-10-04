@@ -2,6 +2,9 @@ package ru.job4j.chess;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -21,12 +24,12 @@ public class BoardTest {
     public void whenFigureCanGoThenOk() {
         Cell source = new Cell(6, 1);
         Figure bishop = new Bishop(source);
-        Figure[] f = new Figure[1];
+        List<Figure> f = new ArrayList<>();
         Board board = new Board(f);
         Cell dest = new Cell(3, 4);
         board.add(bishop);
         board.move(source, dest);
-        assertThat(f[0].position, is(dest));
+        assertThat(f.get(0).position, is(dest));
     }
 
     /**
@@ -36,7 +39,7 @@ public class BoardTest {
     public void whenWayOfFigureIsOccupied() {
         Figure bishop = new Bishop(new Cell(6, 1));
         Figure bishop1 = new Bishop(new Cell(4, 3));
-        Figure[] f = new Figure[2];
+        List<Figure> f = new ArrayList<>();
         Board board = new Board(f);
         board.add(bishop);
         board.add(bishop1);
@@ -52,7 +55,7 @@ public class BoardTest {
     public void whenFigureNotFound() {
         Figure bishop = new Bishop(new Cell(6, 1));
         Figure bishop1 = new Bishop(new Cell(4, 3));
-        Figure[] f = new Figure[2];
+        List<Figure> f = new ArrayList<>();
         Board board = new Board(f);
         board.add(bishop);
         board.add(bishop1);
@@ -67,7 +70,7 @@ public class BoardTest {
     @Test(expected = ImpossibleMoveException.class)
     public void whenFigureImpossibleToMove() {
         Figure bishop = new Bishop(new Cell(6, 1));
-        Figure[] f = new Figure[1];
+        List<Figure> f = new ArrayList<>();
         Board board = new Board(f);
         board.add(bishop);
         Cell dest = new Cell(0, 8);
@@ -80,7 +83,7 @@ public class BoardTest {
     @Test(expected = ImpossibleMoveException.class)
     public void whenBishopImpossibleToMove() {
         Figure bishop = new Bishop(new Cell(6, 1));
-        Figure[] f = new Figure[1];
+        List<Figure> f = new ArrayList<>();
         Board board = new Board(f);
         board.add(bishop);
         Cell dest = new Cell(6, 4);
