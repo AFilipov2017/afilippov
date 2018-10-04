@@ -91,11 +91,14 @@ public class Tracker {
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         Predicate<String> predicate = (x) -> x.equals(key);
-        items.forEach((n) -> {if (n != null && predicate.test(n.getName()) || n != null && predicate.test(n.getId())) {
-            result.add(n);
-        }});
+        items.forEach((n) -> {
+            if (n != null && predicate.test(n.getName()) || n != null && predicate.test(n.getId())) {
+                result.add(n);
+            }
+        });
         return result;
     }
+
 
     /**
      * Метод проверяет в цикле все элементы массива this.items,

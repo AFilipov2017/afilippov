@@ -1,7 +1,6 @@
 package ru.job4j.chess;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
@@ -32,7 +31,8 @@ public class Bishop extends Figure {
                 source.setX(changeCoord(source.getX(), dest.getX()));
                 source.setY(changeCoord(source.getY(), dest.getY()));
                 i++;
-            } while(i != loop);
+            }
+            while (i != loop);
         } else {
             throw new ImpossibleMoveException("Impossible move");
         }

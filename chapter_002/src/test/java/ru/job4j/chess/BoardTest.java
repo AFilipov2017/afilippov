@@ -17,6 +17,7 @@ import static org.junit.Assert.assertThat;
  */
 
 public class BoardTest {
+
     /**
      * Test Figure can go.
      */

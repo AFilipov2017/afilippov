@@ -36,6 +36,7 @@ public class Board {
         if (!result) {
             throw new FigureNotFoundException("Figure not found");
         }
+
         Predicate<Integer> p = n -> n > 8 || n <= 0;
         if (p.test(source.getX()) || p.test(source.getY()) || p.test(dest.getX()) || p.test(dest.getY())) {
             throw new ImpossibleMoveException("Impossible move exception.");
