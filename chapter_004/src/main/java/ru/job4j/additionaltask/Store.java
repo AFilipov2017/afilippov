@@ -12,7 +12,7 @@ public class Store<T extends Store.User> {
     private int changed = 0;
 
     Info diff(List<T> previous, List<T> current) {
-        Info a = new Info();
+        Info a = new Info(0, 0, 0);
         previous.stream().forEach(n -> {
             if (current.contains(n)) {
                 ++count;
@@ -20,11 +20,11 @@ public class Store<T extends Store.User> {
         });
         previous.stream().forEach(n -> current.forEach(m -> {
             if (m.id == n.id && !m.name.equals(n.name)) {
-                a.getMap().put("Changed users", ++changed);
+                a.setEdit(++changed);
             }
         }));
-        a.getMap().put("Added users", current.size() - count - changed);
-        a.getMap().put("Deleted users", previous.size() - count - changed);
+        a.setAdd(current.size() - count - changed);
+        a.setDelete(previous.size() - count - changed);
 
         return a;
     }

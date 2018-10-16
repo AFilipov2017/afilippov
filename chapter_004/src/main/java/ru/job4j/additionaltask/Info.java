@@ -1,17 +1,42 @@
 package ru.job4j.additionaltask;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 0.1
  * @since 03.10.2018
  */
 public class Info {
-    private Map<String, Integer> map = new HashMap<>();
+    private int add;
+    private int delete;
+    private int edit;
 
-    public Map<String, Integer> getMap() {
-        return map;
+    public Info(int add, int delete, int edit) {
+        this.add = add;
+        this.delete = delete;
+        this.edit = edit;
+    }
+
+    public int getAdd() {
+        return add;
+    }
+
+    public void setAdd(int add) {
+        this.add = add;
+    }
+
+    public int getDelete() {
+        return delete;
+    }
+
+    public void setDelete(int delete) {
+        this.delete = delete;
+    }
+
+    public int getEdit() {
+        return edit;
+    }
+
+    public void setEdit(int edit) {
+        this.edit = edit;
     }
 }

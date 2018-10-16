@@ -27,8 +27,8 @@ public class StoreTest {
         list1.addAll(list);
         list1.add(new Store.User(5, "Nicol"));
         Store store = new Store();
-        Info map = store.diff(list, list1);
-        int value = map.getMap().get("Added users");
+        Info res = store.diff(list, list1);
+        int value = res.getAdd();
         assertThat(value, is(1));
     }
 
@@ -44,9 +44,9 @@ public class StoreTest {
         list1.remove(0);
         list1.add(new Store.User(5, "Nicol"));
         Store store = new Store();
-        Info map = store.diff(list, list1);
-        int value = map.getMap().get("Added users");
-        int value1 = map.getMap().get("Deleted users");
+        Info res = store.diff(list, list1);
+        int value = res.getAdd();
+        int value1 = res.getDelete();
         assertThat(value, is(1));
         assertThat(value1, is(1));
     }
@@ -64,7 +64,7 @@ public class StoreTest {
         list1.remove(0);
         Store store = new Store();
         Info map = store.diff(list, list1);
-        int value = map.getMap().get("Deleted users");
+        int value = map.getDelete();
         assertThat(value, is(2));
     }
 
@@ -80,7 +80,7 @@ public class StoreTest {
         list1.set(0, new Store.User(1, "Sergey"));
         Store<Store.User> store = new Store<>();
         Info map = store.diff(list, list1);
-        int value = map.getMap().get("Changed users");
+        int value = map.getEdit();
         assertThat(value, is(1));
     }
 }
