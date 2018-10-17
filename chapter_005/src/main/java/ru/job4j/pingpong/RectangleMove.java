@@ -19,17 +19,11 @@ public class RectangleMove implements Runnable {
         int stepX = 1;
         int stepY = 1;
         while (true) {
-            if (rect.getX() >= 300) {
-                stepX = -1;
+            if (rect.getX() >= 300 || rect.getX() <= 0 ) {
+                stepX *= -1;
             }
-            if (rect.getX() <= 0) {
-                stepX = 1;
-            }
-            if (rect.getY() >= 300) {
-                stepY = -1;
-            }
-            if (rect.getY() <= 0) {
-                stepY = 1;
+            if (rect.getY() >= 300 || rect.getY() <= 0) {
+                stepY *= -1;
             }
             this.rect.setX(this.rect.getX() + stepX);
             this.rect.setY(this.rect.getY() + stepY);

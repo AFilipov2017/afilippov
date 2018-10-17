@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 0.1
