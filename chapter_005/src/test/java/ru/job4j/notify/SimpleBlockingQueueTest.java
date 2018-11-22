@@ -19,7 +19,12 @@ public class SimpleBlockingQueueTest {
         Thread tPoll = new Thread(new Runnable() {
             @Override
             public void run() {
-                queue.poll();
+                try {
+                    queue.poll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -46,7 +51,12 @@ public class SimpleBlockingQueueTest {
         Thread tPoll = new Thread(new Runnable() {
             @Override
             public void run() {
-                queue.poll();
+                try {
+                    queue.poll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 

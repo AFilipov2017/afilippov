@@ -21,7 +21,7 @@ public class SimpleBlockingQueue<T> {
         this.queue = new LinkedList<>();
     }
 
-    public synchronized void offer(T value) {
+    public synchronized void offer(T value){
         while (queue.size() >= MAX_SIZE) {
             try {
                 this.wait();
@@ -33,7 +33,11 @@ public class SimpleBlockingQueue<T> {
         this.notify();
     }
 
-    public synchronized T poll() {
+    public synchronized int getSize() {
+        return queue.size();
+    }
+
+    public synchronized T poll() throws InterruptedException {
         while (queue.size() == 0) {
             try {
                 this.wait();
