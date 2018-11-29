@@ -14,14 +14,14 @@ import java.util.Queue;
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
-    private Queue<T> queue;
+    private final Queue<T> queue;
     private static final int MAX_SIZE = 5;
 
     public SimpleBlockingQueue() {
         this.queue = new LinkedList<>();
     }
 
-    public synchronized void offer(T value){
+    public synchronized void offer(T value) {
         while (queue.size() >= MAX_SIZE) {
             try {
                 this.wait();
