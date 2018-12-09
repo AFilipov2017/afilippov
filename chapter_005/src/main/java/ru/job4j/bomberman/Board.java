@@ -1,7 +1,6 @@
 package ru.job4j.bomberman;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Predicate;
 
@@ -14,8 +13,8 @@ public class Board {
 
     private final ReentrantLock[][] board;
 
-    public Board(int lenght) {
-        this.board = new ReentrantLock[lenght][lenght];
+    public Board(int length) {
+        this.board = new ReentrantLock[length][length];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new ReentrantLock();
@@ -26,23 +25,15 @@ public class Board {
     public boolean move(Cell source, Cell dest) {
         boolean result = false;
         Predicate<Integer> pr = (a) -> a >= 0 && a <= board.length;
-        board[source.getY()][source.getX()].lock();
-        if (pr.test(dest.getY()) && pr.test(dest.getX())) {
-            try {
-                if (board[dest.getY()][dest.getX()].tryLock(500, TimeUnit.MILLISECONDS)) {
-                    board[source.getY()][source.getX()].unlock();
-                    result = true;
-                } else {
-                    do {
-                        dest = randomMove(source);
-                        result = board[dest.getY()][dest.getX()].tryLock();
-                    }
-                    while (!result);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        do {
+            if (pr.test(dest.getY()) && pr.test(dest.getX()) && board[dest.getY()][dest.getX()].tryLock()){
+                board[source.getY()][source.getX()].unlock();
+                source.setY(dest.getY());
+                source.setX(dest.getX());
+                result = true;
+            }else {dest = randomMove(source);}
+        }while (!result);
+
         return result;
     }
 
@@ -63,4 +54,6 @@ public class Board {
     public void lock(Cell cell) {
         board[cell.getY()][cell.getX()].lock();
     }
+
+
 }

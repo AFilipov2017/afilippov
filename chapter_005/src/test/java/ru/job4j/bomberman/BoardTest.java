@@ -16,6 +16,7 @@ public class BoardTest {
     @Test
     public void whenMoveInFreeSpace() {
         Board board = new Board(5);
+        board.lock(new Cell(0, 0));
         assertTrue(board.move(new Cell(0, 0), new Cell(1, 0)));
         assertTrue(board.move(new Cell(1, 0), new Cell(1, 1)));
         assertTrue(board.move(new Cell(1, 1), new Cell(2, 1)));
@@ -26,11 +27,13 @@ public class BoardTest {
     @Test
     public void whenJustOneWay() {
         Board board = new Board(3);
+        board.lock(new Cell(1, 1));
         Thread t = new Thread(() -> {
             board.lock(new Cell(0, 0));
             board.lock(new Cell(0, 1));
             board.lock(new Cell(0, 2));
             board.lock(new Cell(1, 0));
+
             board.lock(new Cell(2, 0));
             board.lock(new Cell(2, 1));
             board.lock(new Cell(2, 2));
@@ -48,6 +51,7 @@ public class BoardTest {
     @Test(timeout = 5000)
     public void whenMoveInLockedSpace() {
         Board board = new Board(3);
+        board.lock(new Cell(1, 1));
         Thread t = new Thread(() -> {
             board.lock(new Cell(0, 0));
             board.lock(new Cell(0, 1));
