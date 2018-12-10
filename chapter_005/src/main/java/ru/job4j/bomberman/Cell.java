@@ -6,6 +6,7 @@ package ru.job4j.bomberman;
  * @since 06.12.2018
  */
 public class Cell {
+
     private int x;
     private int y;
 

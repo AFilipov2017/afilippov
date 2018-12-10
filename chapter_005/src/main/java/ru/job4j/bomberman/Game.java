@@ -7,19 +7,18 @@ package ru.job4j.bomberman;
  */
 public class Game {
 
-    private Board board = new Board(3);
-    private Bman bman = new Bman(1, 1);
+    private Board board = new Board(5);
 
-    public void start() {
+    public void putMonsters(int number, int speed) {
+        for (int i = 0; i < number; i++) {
+            putBombMan(speed);
+        }
+    }
+
+    public void moduleOfLabyrinth(int number) {
         Thread t = new Thread(() -> {
-            board.lock(bman);
-            while (true){
-                try {
-                    board.move(bman, new Cell(1, 0));
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            for (int i = 0; i < number; i++) {
+                board.lock(board.randomPosition());
             }
         });
         t.start();
@@ -30,8 +29,25 @@ public class Game {
         }
     }
 
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.start();
+    public void putBombMan(int speed) {
+        Thread t = new Thread(() -> {
+            Cell creature = board.randomPosition();
+            Cell creatureDest = board.randomMove(creature);
+            board.lock(creature);
+            while (true) {
+                boolean a = false;
+                while (!a) {
+                    a = board.lock(creature);
+                }
+                try {
+                    board.move(creature, creatureDest);
+                    Thread.sleep(speed);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+        System.out.println(t.getName());
     }
 }

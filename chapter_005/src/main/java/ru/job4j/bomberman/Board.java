@@ -22,17 +22,29 @@ public class Board {
         }
     }
 
+    public int getLength() {
+        return board.length;
+    }
+
     public boolean move(Cell source, Cell dest) {
         boolean result = false;
-        Predicate<Integer> pr = (a) -> a >= 0 && a <= board.length;
+        System.out.println(source.getY() + " " + source.getX() + "   " + dest.getY() + " " + dest.getX());
+        Predicate<Integer> pr = (a) -> a >= 0 && a < board.length;
         do {
-            if (pr.test(dest.getY()) && pr.test(dest.getX()) && board[dest.getY()][dest.getX()].tryLock()){
+            if (pr.test(dest.getY()) && pr.test(dest.getX()) && board[dest.getY()][dest.getX()].tryLock()) {
                 board[source.getY()][source.getX()].unlock();
                 source.setY(dest.getY());
                 source.setX(dest.getX());
+                Cell a = randomMove(source);
+                dest.setY(a.getY());
+                dest.setX(a.getX());
                 result = true;
-            }else {dest = randomMove(source);}
-        }while (!result);
+            } else {
+                Cell c = randomMove(source);
+                dest.setY(c.getY());
+                dest.setX(c.getX());
+            }
+        } while (!result);
 
         return result;
     }
@@ -51,9 +63,18 @@ public class Board {
         return newCell;
     }
 
-    public void lock(Cell cell) {
-        board[cell.getY()][cell.getX()].lock();
+    public boolean lock(Cell cell) {
+        return board[cell.getY()][cell.getX()].tryLock();
     }
 
-
+    public Cell randomPosition() {
+        Random rnd = new Random();
+        int[] arr = new int[board.length];
+        for (int i = 0; i < board.length; i++) {
+            arr[i] = i;
+        }
+        Cell cell = new Cell(arr[rnd.nextInt(board.length)], arr[rnd.nextInt(board.length)]);
+        System.out.println("blocks of labyrinth " + cell.getY() + " " + cell.getX());
+        return cell;
+    }
 }
