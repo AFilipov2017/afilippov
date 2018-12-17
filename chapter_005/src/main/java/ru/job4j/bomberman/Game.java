@@ -1,5 +1,6 @@
 package ru.job4j.bomberman;
 
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 0.1
@@ -7,11 +8,29 @@ package ru.job4j.bomberman;
  */
 public class Game {
 
-    private Board board = new Board(5);
+    private Board board = new Board(2);
 
     public void putMonsters(int number, int speed) {
         for (int i = 0; i < number; i++) {
-            putBombMan(speed);
+           Thread t = new Thread(() -> {
+                Cell creature = board.randomPosition();
+                Cell creatureDest = board.randomMove(creature);
+                while (true) {
+                    boolean a = false;
+                    while (!a) {
+                        a = board.lock(creature);
+                    }
+                    try {
+                        System.out.println("monster");
+                        board.move(creature, creatureDest);
+                        Thread.sleep(speed);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+           t.setDaemon(true);
+           t.start();
         }
     }
 
@@ -30,24 +49,35 @@ public class Game {
     }
 
     public void putBombMan(int speed) {
+
         Thread t = new Thread(() -> {
             Cell creature = board.randomPosition();
             Cell creatureDest = board.randomMove(creature);
-            board.lock(creature);
-            while (true) {
+            boolean b = false;
+            while (!b){
                 boolean a = false;
                 while (!a) {
                     a = board.lock(creature);
                 }
                 try {
+                    System.out.println("bombman");
                     board.move(creature, creatureDest);
                     Thread.sleep(speed);
+                    b = board.gameOver(creature);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
         t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(t.getName());
     }
+
+
+
 }

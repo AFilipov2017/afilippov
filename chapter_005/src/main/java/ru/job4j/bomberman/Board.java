@@ -22,10 +22,6 @@ public class Board {
         }
     }
 
-    public int getLength() {
-        return board.length;
-    }
-
     public boolean move(Cell source, Cell dest) {
         boolean result = false;
         System.out.println(source.getY() + " " + source.getX() + "   " + dest.getY() + " " + dest.getX());
@@ -74,7 +70,10 @@ public class Board {
             arr[i] = i;
         }
         Cell cell = new Cell(arr[rnd.nextInt(board.length)], arr[rnd.nextInt(board.length)]);
-        System.out.println("blocks of labyrinth " + cell.getY() + " " + cell.getX());
         return cell;
+    }
+
+    public boolean gameOver(Cell cell) {
+            return board[cell.getY()][cell.getX()].hasQueuedThreads();
     }
 }
