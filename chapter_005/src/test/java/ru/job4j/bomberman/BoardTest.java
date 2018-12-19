@@ -1,9 +1,6 @@
 package ru.job4j.bomberman;
 
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runners.model.TestTimedOutException;
-
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -14,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class BoardTest {
 
     @Test
-    public void whenMoveInFreeSpace() {
+    public void whenMoveInFreeSpace() throws InterruptedException {
         Board board = new Board(5);
         board.lock(new Cell(0, 0));
         assertTrue(board.move(new Cell(0, 0), new Cell(1, 0)));
@@ -25,7 +22,7 @@ public class BoardTest {
     }
 
     @Test
-    public void whenJustOneWay() {
+    public void whenJustOneWay() throws InterruptedException {
         Board board = new Board(3);
         board.lock(new Cell(1, 1));
         Thread t = new Thread(() -> {
@@ -45,29 +42,5 @@ public class BoardTest {
             e.printStackTrace();
         }
         assertTrue(board.move(new Cell(1, 1), new Cell(1, 0)));
-    }
-
-    @Ignore
-    @Test(timeout = 5000)
-    public void whenMoveInLockedSpace() {
-        Board board = new Board(3);
-        board.lock(new Cell(1, 1));
-        Thread t = new Thread(() -> {
-            board.lock(new Cell(0, 0));
-            board.lock(new Cell(0, 1));
-            board.lock(new Cell(0, 2));
-            board.lock(new Cell(1, 0));
-            board.lock(new Cell(1, 2));
-            board.lock(new Cell(2, 0));
-            board.lock(new Cell(2, 1));
-            board.lock(new Cell(2, 2));
-        });
-        t.start();
-        try {
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        board.move(new Cell(1, 1), new Cell(1, 0));
     }
 }

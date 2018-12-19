@@ -15,11 +15,11 @@ public class Game {
            Thread t = new Thread(() -> {
                 Cell creature = board.randomPosition();
                 Cell creatureDest = board.randomMove(creature);
+               boolean a = false;
+               while (!a) {
+                   a = board.lock(creature);
+               }
                 while (true) {
-                    boolean a = false;
-                    while (!a) {
-                        a = board.lock(creature);
-                    }
                     try {
                         System.out.println("monster");
                         board.move(creature, creatureDest);
@@ -49,35 +49,26 @@ public class Game {
     }
 
     public void putBombMan(int speed) {
-
         Thread t = new Thread(() -> {
             Cell creature = board.randomPosition();
             Cell creatureDest = board.randomMove(creature);
             boolean b = false;
-            while (!b){
-                boolean a = false;
-                while (!a) {
-                    a = board.lock(creature);
-                }
+            boolean a = false;
+            while (!a) {
+                a = board.lock(creature);
+            }
+            while (!b) {
                 try {
                     System.out.println("bombman");
                     board.move(creature, creatureDest);
                     Thread.sleep(speed);
                     b = board.gameOver(creature);
+                    System.out.println(b + " kill");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        });
+        }, "bomberman");
         t.start();
-        try {
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(t.getName());
     }
-
-
-
 }

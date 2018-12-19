@@ -1,6 +1,7 @@
 package ru.job4j.bomberman;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Predicate;
 
@@ -22,12 +23,13 @@ public class Board {
         }
     }
 
-    public boolean move(Cell source, Cell dest) {
+    public boolean move(Cell source, Cell dest) throws InterruptedException {
         boolean result = false;
         System.out.println(source.getY() + " " + source.getX() + "   " + dest.getY() + " " + dest.getX());
         Predicate<Integer> pr = (a) -> a >= 0 && a < board.length;
         do {
-            if (pr.test(dest.getY()) && pr.test(dest.getX()) && board[dest.getY()][dest.getX()].tryLock()) {
+            int time = Thread.currentThread().getName().equals("bomberman") ? 500 : 5000;
+            if (pr.test(dest.getY()) && pr.test(dest.getX()) && board[dest.getY()][dest.getX()].tryLock(time, TimeUnit.MILLISECONDS)) {
                 board[source.getY()][source.getX()].unlock();
                 source.setY(dest.getY());
                 source.setX(dest.getX());
@@ -41,7 +43,6 @@ public class Board {
                 dest.setX(c.getX());
             }
         } while (!result);
-
         return result;
     }
 
