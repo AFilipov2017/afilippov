@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class Tracker {
+public class Tracker implements ITracker {
     private List<Item> items;
     private int position = 0;
     private static final Random RAND = new Random();

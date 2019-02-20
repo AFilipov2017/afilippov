@@ -42,11 +42,11 @@ class FindItemByName extends BaseAction {
 
 public class MenuTracker {
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     private List<UserAction> actions = new ArrayList<>();
     private int position = 0;
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, ITracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -74,7 +74,7 @@ public class MenuTracker {
     }
 
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, (Tracker) this.tracker);
     }
 
     public void show() {
