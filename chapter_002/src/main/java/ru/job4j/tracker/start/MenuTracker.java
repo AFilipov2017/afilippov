@@ -16,9 +16,9 @@ class EditItem extends BaseAction {
         String id = input.ask("Please enter task`s id: ");
         String name = input.ask("Please enter task`s name: ");
         String desc = input.ask("Please enter task`s desc: ");
+        String comm = input.ask("Please enter task`s comment: ");
         Date date = new Date();
         long created = date.getTime();
-        String[] comm = new String[10];
         Item items = new Item(name, desc, created, comm);
         items.setId(id);
         tracker.replace(id, items);
@@ -94,9 +94,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please enter task`s name: ");
             String desc = input.ask("Please enter task`s desc: ");
+            String comm = input.ask("Please enter task`s comment: ");
             Date date = new Date();
             long created = date.getTime();
-            String[] comm = new String[10];
             tracker.add(new Item(name, desc, created, comm));
         }
     }

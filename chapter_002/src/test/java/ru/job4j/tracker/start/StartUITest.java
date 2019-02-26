@@ -31,7 +31,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         ITracker tracker = new Tracker();     // создаём Tracker
-        String[] source = new String[]{"0", "test name", "desc", "y"};
+        String[] source = new String[]{"0", "test name", "desc", "comment", "y"};
         Input input = new StubInput(source);
         //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
@@ -42,7 +42,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerShowAllItemWithSameDesc() {
         ITracker tracker = new Tracker();     // создаём Tracker
-        String[] comm = new String[10];
+        String comm = "";
         String[] source = new String[]{"1", "y"};
         Item item = tracker.add(new Item("name", "desc", 1L, comm));
         Item item1 = tracker.add(new Item("name", "desc1", 1L, comm));
@@ -59,7 +59,7 @@ public class StartUITest {
         ITracker tracker = new Tracker();
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
-        String[] source = new String[]{"2", item.getId(), "name", "desc", "y"};
+        String[] source = new String[]{"2", item.getId(), "name", "desc", "comment", "y"};
         //создаём StubInput с последовательностью действий
         Input input = new StubInput(source);
         // создаём StartUI и вызываем метод init()
@@ -72,7 +72,7 @@ public class StartUITest {
     public void whenDeleteThenTrackerHasUpdatedValue() {
         // создаём Tracker
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item item = tracker.add(new Item());
         Item item1 = tracker.add(new Item("name2", "desc2", 12L, comm));
         String[] source = new String[]{"3", item.getId(), "y"};
@@ -88,7 +88,7 @@ public class StartUITest {
     public void whenTheUserSearchesByID() {
         // создаём Tracker
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item item = tracker.add(new Item("name", "desc", 12L, comm));
         Item item1 = tracker.add(new Item("name1", "desc", 12L, comm));
         String[] source = new String[]{"4", item1.getId(), "y"};
@@ -103,7 +103,7 @@ public class StartUITest {
     @Test
     public void whenTheUserSearchesForTheName() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item item = tracker.add(new Item("name1", "desc2", 12L, comm));
         Item item1 = tracker.add(new Item("name3", "desc2", 123L, comm));
         Item item2 = tracker.add(new Item("name3", "desc2", 12L, comm));

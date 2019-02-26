@@ -9,13 +9,13 @@ public class Item {
     public String name;
     public String description;
     public long created;
-    public String[] comments;
+    public String comments;
 
     public Item() {
 
     }
 
-    public Item(String name, String description, long created, String[] comments) {
+    public Item(String name, String description, long created, String comments) {
         this.name = name;
         this.description = description;
         this.created = created;
@@ -39,11 +39,11 @@ public class Item {
         return this.description;
     }
 
-    public String[] getComments() {
+    public String getComments() {
         return comments;
     }
 
-    public void setComments(String[] comments) {
+    public void setComments(String comments) {
         this.comments = comments;
     }
 }

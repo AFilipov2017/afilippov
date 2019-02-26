@@ -19,7 +19,7 @@ public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item item = new Item("test1", "testDescription", 123L, comm);
         tracker.add(item);
         assertThat(tracker.findAll().get(0), is(item));
@@ -28,7 +28,7 @@ public class TrackerTest {
     @Test
     public void whenWeTryFindById() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item previous = new Item("test1", "testDescription", 123L, comm);
         Item next = new Item("test2", "testDescription2", 1234L, comm);
         tracker.add(previous);
@@ -40,7 +40,7 @@ public class TrackerTest {
     @Test
     public void whenWeTryFindByName() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item one = new Item("test1", "testDescription", 123L, comm);
         Item two = new Item("test2", "testDescription2", 1234L, comm);
         Item three = new Item("test2", "testDescription2", 1234L, comm);
@@ -54,7 +54,7 @@ public class TrackerTest {
     @Test
     public void whenReplaceNameThenReturnNewName() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item previous = new Item("test1", "testDescription", 123L, comm);
         tracker.add(previous);
         Item next = new Item("test2", "testDescription2", 1234L, comm);
@@ -66,7 +66,7 @@ public class TrackerTest {
     @Test
     public void whenToDeleteCellArrayToReturnTheCorrected() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item itemOne = new Item("test1", "testDesc1", 1L, comm);
         Item itemTwo = new Item("test2", "testDesc2", 12L, comm);
         Item itemThree = new Item("test3", "testDesc3", 123L, comm);
@@ -86,7 +86,7 @@ public class TrackerTest {
     @Test
     public void whenWeCompareTheTwoNames() {
         ITracker tracker = new Tracker();
-        String[] comm = new String[10];
+        String comm = "";
         Item itemOne = new Item("test34", "testDesc1", 1L, comm);
         Item itemTwo = new Item("test2", "testDesc2", 12L, comm);
         Item itemThree = new Item("test3", "testDesc3", 123L, comm);
