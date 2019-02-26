@@ -26,10 +26,10 @@ public class SQLstorage {
             st.setInt(1, 2);
             st.setInt(2, 4);
             ResultSet rs = st.executeQuery();
-            while (rs.next())
-            {
-                System.out.println(String.format("%s %s" , rs.getString("name"),  rs.getString("bodywork_id")));
-            } rs.close();
+            while (rs.next()) {
+                System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("bodywork_id")));
+            }
+            rs.close();
             st.close();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
