@@ -1,4 +1,5 @@
 package ru.job4j.tracker.models;
+
 /**
  * @author Andrey Filippov (afilipov1980@gmail.com)
  * @version 1
@@ -12,7 +13,6 @@ public class Item {
     public String comments;
 
     public Item() {
-
     }
 
     public Item(String name, String description, long created, String comments) {
@@ -28,7 +28,12 @@ public class Item {
 
     public String setId(String id) {
         this.id = id;
-		return id;
+        return id;
+    }
+
+
+    public long getCreated() {
+        return created;
     }
 
     public String getName() {
