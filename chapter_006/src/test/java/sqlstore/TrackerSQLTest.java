@@ -73,6 +73,11 @@ public class TrackerSQLTest {
         sql.delete("2");
         List<Item> list3 = sql.findAll();
         assertThat(list3.size(), is(2));
+        try {
+            sql.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

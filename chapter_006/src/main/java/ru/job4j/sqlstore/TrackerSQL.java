@@ -22,6 +22,10 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     private static final Logger LOG = LogManager.getLogger(TrackerSQL.class.getName());
     private Connection connection;
 
+    public TrackerSQL() {
+        init();
+    }
+
     public boolean init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -39,7 +43,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     public boolean checkTableExist() {
-        init();
         boolean result = false;
         try {
             DatabaseMetaData metadata = connection.getMetaData();
@@ -53,14 +56,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 result = true;
             }
         } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
+            LOG.error("error message {}", "error in checkTableExist");
         }
         return result;
     }
 
     @Override
     public Item add(Item item) {
-        init();
         try (PreparedStatement st = connection.prepareStatement("INSERT INTO tracker(item_id, name, description, created_date, comment) values (?, ?, ?, ?, ?);")) {
             st.setString(1, item.getId());
             st.setString(2, item.getName());
@@ -69,22 +71,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             st.setString(5, item.getComments());
             st.executeUpdate();
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            }
+            LOG.error("error message {}", "error in  add method");
         }
         return item;
     }
 
     @Override
     public void replace(String id, Item item) {
-        init();
         try (PreparedStatement st = connection.prepareStatement("UPDATE tracker SET item_id = ?, name = ?, description = ?, created_date = ?, comment = ? WHERE id = ?;")) {
             st.setString(1, item.getId());
             st.setString(2, item.getName());
@@ -94,40 +87,22 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             st.setInt(6, Integer.parseInt(id));
             st.executeUpdate();
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            }
+            LOG.error("error message {}", "error in  replace method");
         }
     }
 
     @Override
     public void delete(String id) {
-        init();
         try (PreparedStatement st = connection.prepareStatement("DELETE FROM tracker WHERE id = ?;")) {
             st.setInt(1, Integer.parseInt(id));
             st.executeUpdate();
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            }
+            LOG.error("error message {}", "error in  delete method");
         }
     }
 
     @Override
     public List<Item> findAll() {
-        init();
         List<Item> list = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement("SELECT name, description, created_date, comment FROM tracker;")) {
             ResultSet rs = st.executeQuery();
@@ -138,22 +113,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             }
             rs.close();
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            }
+            LOG.error("error message {}", "error in  findAll method");
         }
         return list;
     }
 
     @Override
     public List<Item> findByName(String key) {
-        init();
         List<Item> list = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement("SELECT name, description, created_date, comment FROM tracker WHERE name like ?;")) {
             st.setString(1, key);
@@ -165,22 +131,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             }
             rs.close();
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            }
+            LOG.error("error message {}", "error in  findByName method");
         }
         return list;
     }
 
     @Override
     public Item findById(String id) {
-        init();
         Item item = new Item();
         try (PreparedStatement st = connection.prepareStatement("SELECT name, description, created_date, comment FROM tracker WHERE id = ?;")) {
             st.setInt(1, Integer.parseInt(id));
@@ -192,15 +149,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             }
             rs.close();
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-            }
+            LOG.error("error message {}", "error in  findById method");
         }
         return item;
     }
