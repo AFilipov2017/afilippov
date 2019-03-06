@@ -9,6 +9,7 @@ import java.sql.SQLException;
  * @version 0.1
  * @since 06.03.2019
  */
+
 /**
  * Connection, which rollback all commits.
  * It is used for integration test.
@@ -17,6 +18,7 @@ public class ConnectionRollback {
 
     /**
      * Create connection with autocommit=false mode and rollback call, when conneciton is closed.
+     *
      * @param connection connection.
      * @return Connection object.
      * @throws SQLException possible exception.
@@ -25,7 +27,7 @@ public class ConnectionRollback {
         connection.setAutoCommit(false);
         return (Connection) Proxy.newProxyInstance(
                 ConnectionRollback.class.getClassLoader(),
-                new Class[] { Connection.class },
+                new Class[]{Connection.class},
                 (proxy, method, args) -> {
                     Object rsl = null;
                     if ("close".equals(method.getName())) {
